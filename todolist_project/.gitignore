@@ -21,10 +21,11 @@ __pycache__/
 # /media/
 
 # Django Migrations
-**/migrations/**
+# **/migrations/**
 
 # Virtual environment
 .venv/
+../.venv/
 
 # IDE and editor settings
 .vscode/
