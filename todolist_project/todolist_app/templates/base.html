@@ -14,8 +14,16 @@
 
     {% comment %} Custom CSS {% endcomment %}
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+    {% block extra_head %}{% endblock %}
+
 </head>
 <body>
-    
+    {% block content %}{% endblock %}
+
+    <!-- Bootstrap 5 JS (including Popper.js) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js" integrity="sha384-mQ93jY+N3SGVVz8x+Knujsl5+5hb7x5k5Fw5jRk3lhKp7i1J7wpoeN4zvFuh8sZ" crossorigin="anonymous"></script>
+
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>
