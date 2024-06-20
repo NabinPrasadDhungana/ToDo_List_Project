@@ -37,3 +37,10 @@
 nav {
     width: 100%;
 }
+
+.card-heading i {
+    font-size: 2rem;
+    margin: 0 0 7px 15px;
+    /* color: rgb(10, 155, 10); */
+    color: #007BFF;
+}
