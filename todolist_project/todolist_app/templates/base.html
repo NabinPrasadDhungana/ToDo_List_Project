@@ -17,12 +17,21 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    {% comment %} Favicon links {% endcomment %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'image/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'image/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'image/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'image/favicon/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'image/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     {% block extra_head %}{% endblock %}
 
 </head>
 <body>
     {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 py-2 px-4">
         <div class="container-fluid">
           <a class="navbar-brand mx-4" href="{% url 'home' %}"><img src="{% static '/todolist_app/image/todo-logo.png' %}" alt="Logo image"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +40,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -59,7 +68,10 @@
         </div>
       </nav>
     {% endblock navbar %}
-    {% block content %}{% endblock %}
+    <div class="main">
+
+        {% block content %}{% endblock %}
+    </div>
 
     <!-- Bootstrap 5 JS (including Popper.js) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

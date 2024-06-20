@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body {
+.main {
     /* padding: 0 350px; */
     font-size: 16px;
     padding: 0 350px;
@@ -12,7 +12,7 @@ body {
 
 /* Media query for small devices (phones, less than 576px wide) */
 @media (max-width: 575.98px) {
-    body {
+    .main {
         font-size: 16px; /* Adjust font size for smaller screens */
         padding: 0 20px; /* Adjust padding for smaller screens */
     }
@@ -20,7 +20,7 @@ body {
 
 /* Media query for medium devices (tablets, 576px - 991px wide) */
 @media (min-width: 576px) and (max-width: 991.98px) {
-    body {
+    .main {
         font-size: 16px; /* Default font size */
         padding: 0 50px; /* Default padding */
     }
@@ -28,8 +28,12 @@ body {
 
 /* Media query for large devices (desktops, 992px and above) */
 @media (min-width: 992px) {
-    body {
+    .main {
         font-size: 18px; /* Adjust font size for larger screens */
         padding: 0 20%; /* Adjust padding for larger screens */
     }
+}
+
+nav {
+    width: 100%;
 }
