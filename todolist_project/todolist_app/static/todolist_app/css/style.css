@@ -1,0 +1,35 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* padding: 0 350px; */
+    font-size: 16px;
+    padding: 0 350px;
+}
+
+/* Media query for small devices (phones, less than 576px wide) */
+@media (max-width: 575.98px) {
+    body {
+        font-size: 16px; /* Adjust font size for smaller screens */
+        padding: 0 20px; /* Adjust padding for smaller screens */
+    }
+}
+
+/* Media query for medium devices (tablets, 576px - 991px wide) */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    body {
+        font-size: 16px; /* Default font size */
+        padding: 0 50px; /* Default padding */
+    }
+}
+
+/* Media query for large devices (desktops, 992px and above) */
+@media (min-width: 992px) {
+    body {
+        font-size: 18px; /* Adjust font size for larger screens */
+        padding: 0 20%; /* Adjust padding for larger screens */
+    }
+}
