@@ -6,15 +6,28 @@
       <i class="fas fa-check-square"></i>
     </div>
     <div class="card-body">
-      <p>"Sir," said Mr. Fogg to the captain, "three passengers have disappeared."</p>
+      <form class="text-center" method="GET" action="{% url 'home' %}">
+        <input class="p-1 px-5 border-1 border-primary" type="text" name="search" placeholder="Search To-Do Lists/Items">
+        <button class="p-1 border-1 border-primary text-success" type="submit">Search</button>
+    </form>
 
-      <p>"Dead?" asked the captain.</p>
-
-      <p>"Dead or prisoners; that is the uncertainty which must be solved.  Do you propose to pursue the Sioux?"</p>
-
-      <p>"That's a serious thing to do, sir," returned the captain.  "These Indians may retreat beyond the Arkansas, and I cannot leave the fort unprotected."</p>
-
-      <p>"The lives of three men are in question, sir," said Phileas Fogg.</p>
+    <ul class="list-unstyled">
+      
+      
+      {% if todo_items %}
+      <p class="form-control-lg mt-2">Available To-do items:</p>
+        {% for item in todo_items %}
+        <li><p class="mx-3 fs-4 fw-bold">{{ item.todo_list }} :</p></li>        
+        <ul class="list-unstyled">
+        <li><p class="mx-5">{{ item.title }}</p></li>        
+        </ul>
+        {% endfor %}
+        
+      {% else %}
+        <li><p class="text-danger text-center my-2">No such items/lists</p></li>
+      {% endif %}
+        
+    </ul>
     </div>
   </div>
   
