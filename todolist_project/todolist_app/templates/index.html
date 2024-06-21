@@ -6,28 +6,31 @@
       <i class="fas fa-check-square"></i>
     </div>
     <div class="card-body">
-      <form class="text-center" method="GET" action="{% url 'home' %}">
-        <input class="p-1 px-5 border-1 border-primary" type="text" name="search" placeholder="Search To-Do Lists/Items">
-        <button class="p-1 border-1 border-primary text-success" type="submit">Search</button>
-    </form>
+        <form class="text-center" method="GET" action="{% url 'home' %}">
+          <input class="p-1 px-5 border-1 border-primary" type="text" name="search" placeholder="Search To-Do Lists/Items">
+          <button class="p-1 border-1 border-primary text-success" type="submit">Search</button>
+        </form>
+        <hr>
 
-    <ul class="list-unstyled">
-      
-      
-      {% if todo_items %}
-      <p class="form-control-lg mt-2">Available To-do items:</p>
-        {% for item in todo_items %}
-        <li><p class="mx-3 fs-4 fw-bold">{{ item.todo_list }} :</p></li>        
-        <ul class="list-unstyled">
-        <li><p class="mx-5">{{ item.title }}</p></li>        
-        </ul>
-        {% endfor %}
+    <div class="todo-list">
+      <table class="todo-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Due Date</th>
+          </tr>
+        </thead>
         
-      {% else %}
-        <li><p class="text-danger text-center my-2">No such items/lists</p></li>
-      {% endif %}
-        
-    </ul>
+        <tbody>
+          {% for item in todo_items %}
+          <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.due_date }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
     </div>
   </div>
   

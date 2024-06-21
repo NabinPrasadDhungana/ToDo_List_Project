@@ -44,3 +44,38 @@ nav {
     /* color: rgb(10, 155, 10); */
     color: #007BFF;
 }
+
+
+.todo-list {
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+}
+
+hr {
+    margin-top: 20px;
+    color: #14A44D;
+}
+
+.todo-table {
+    width: 100%;
+}
+
+.todo-table tr {
+    border-bottom: 1px solid #ddd;
+    transition: all 300ms;
+}
+
+thead th {
+    padding-bottom: 5px;
+}
+
+.todo-table tbody tr:hover {
+    /* background-color: rgb(124, 123, 224); */
+    background-color: coral;
+    /* color: white; */
+}
+
+.todo-table td {
+    padding: 15px;
+}
