@@ -18,6 +18,13 @@
     }
 }
 
+/* Media query for search button for small sized screen */
+@media (max-width: 446.36px) {
+    .search-button {
+        margin-top: 5px;
+    }
+}
+
 /* Media query for medium devices (tablets, 576px - 991px wide) */
 @media (min-width: 576px) and (max-width: 991.98px) {
     .main {
@@ -45,6 +52,9 @@ nav {
     color: #007BFF;
 }
 
+.todo-search::placeholder {
+    padding-left: -10px;
+}
 
 .todo-list {
     width: 100%;
