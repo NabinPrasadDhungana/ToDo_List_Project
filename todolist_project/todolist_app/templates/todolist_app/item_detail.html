@@ -34,7 +34,7 @@
             </div>
             <hr>
             <div class="edit-btn justify-content-around d-flex flex-wrap">
-                <a href="#" class="btn btn-sm py-2 btn-success w-25">Update</a>
+                <a href="{% url 'item_update' todo_item.todo_list.id todo_item.id %}" class="btn btn-sm py-2 btn-success w-25">Update</a>
                 <a href="#" class="btn btn-sm py-2 btn-danger w-25">Delete</a>
             </div>
                 

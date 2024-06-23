@@ -38,7 +38,7 @@
               {% for item in todo_items %}
               
                   <tr>
-                  <td><a href="{% url 'item-detail' item.todo_list.id item.id %}">{{ item.title }}</a></td>
+                  <td><a href="{% url 'item_detail' item.todo_list.id item.id %}">{{ item.title }}</a></td>
                   <td>{{ item.due_date }}</td>
                 </tr>
               

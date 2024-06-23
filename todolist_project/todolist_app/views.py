@@ -1,6 +1,7 @@
 from typing import Any
 from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView, UpdateView
+from .forms import *
 
 from .models import *
 # Create your views here.
@@ -29,5 +30,13 @@ class ItemDetailView(DetailView):
 
 class ItemUpdateView(UpdateView):
     model = ToDoItem
-    context_object_name = 'todo_item'
+    form_class = ItemUpdateForm
+    template_name = 'item_update.html'
+    # context_object_name = 'todo_item'
     template_name = 'todolist_app/item_update.html'
+
+    def get_success_url(self):
+        todo_list_id = self.object.todo_list.id
+        item_id = self.object.id
+        return reverse('item_detail', kwargs={'id': todo_list_id, 'pk': item_id})
+    
