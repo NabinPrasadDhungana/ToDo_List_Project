@@ -12,36 +12,41 @@
         </form>
         <hr>
 
-    <div class="todo-list">
-      <a class="nav-link dropdown-toggle float-start" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown
-      </a>
-      <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul> 
-      <table class="todo-table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Due Date</th>
-          </tr>
-        </thead>
-        
-        <tbody>
-          {% for item in todo_items %}
-          <tr>
-            <td>{{ item.title }}</td>
-            <td>{{ item.due_date }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+        <div class="todo-list">
+          {% comment %} <a class="nav-link dropdown-toggle float-start" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul> {% endcomment %}
+          
+          {% if not todo_items %}
+            <p class="text-center text-danger pt-5">There are no to-dos currently.</p>
+          {% else %}             
+          <table class="todo-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Due Date</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              {% for item in todo_items %}
+              
+                  <tr>
+                  <td><a href="{% url 'item-detail' item.todo_list.id item.id %}">{{ item.title }}</a></td>
+                  <td>{{ item.due_date }}</td>
+                </tr>
+              
+              {% endfor %}
+            </tbody>
+          </table>
+          {% endif %}
+        </div>
     </div>
   </div>
-  
-</div>
 {% endblock content %}
