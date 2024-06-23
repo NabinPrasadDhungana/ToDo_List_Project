@@ -1,6 +1,6 @@
 from typing import Any
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, UpdateView
 
 from .models import *
 # Create your views here.
@@ -26,3 +26,8 @@ class ItemDetailView(DetailView):
     model = ToDoItem
     context_object_name = 'todo_item'
     template_name = 'todolist_app/item_detail.html'
+
+class ItemUpdateView(UpdateView):
+    model = ToDoItem
+    context_object_name = 'todo_item'
+    template_name = 'todolist_app/item_update.html'
