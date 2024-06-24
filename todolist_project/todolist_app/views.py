@@ -1,4 +1,5 @@
 from typing import Any
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView, UpdateView
 from .forms import *
@@ -39,4 +40,9 @@ class ItemUpdateView(UpdateView):
         todo_list_id = self.object.todo_list.id
         item_id = self.object.id
         return reverse('item_detail', kwargs={'id': todo_list_id, 'pk': item_id})
+    
+    # def post(self, request, *args, **kwargs):
+    #     if "cancel" in request.POST:
+    #         return redirect(self.get_success_url())
+    #     return super().post(request, *args, **kwargs)
     
