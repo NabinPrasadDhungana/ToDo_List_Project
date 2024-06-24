@@ -5,4 +5,11 @@ from .models import ToDoList, ToDoItem
 class ItemUpdateForm(forms.ModelForm):
     class Meta:
         model = ToDoItem
-        fields = '__all__'
+        exclude = ['created_date']
+        widgets = {
+            'todo_list': forms.Select(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'due_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
+            'completed': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }

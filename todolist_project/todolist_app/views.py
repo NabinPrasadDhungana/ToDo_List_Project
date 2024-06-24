@@ -32,7 +32,7 @@ class ItemUpdateView(UpdateView):
     model = ToDoItem
     form_class = ItemUpdateForm
     template_name = 'item_update.html'
-    # context_object_name = 'todo_item'
+    context_object_name = 'todo_item'
     template_name = 'todolist_app/item_update.html'
 
     def get_success_url(self):

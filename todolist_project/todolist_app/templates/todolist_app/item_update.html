@@ -3,12 +3,45 @@
 
 {% block content %}
 
-<h1>Todo Item Update Form</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+<div class="container col-lg-8 col-md-8 col-sm-12">
+    <div class="card border-success">
+        <div class="card-header text-center border-primary">
+            <h2>Todo Item Update Form</h2>
+        </div>
+        <div class="card-body">
+            <div class="update-form ">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group my-2">
+                        <label class="my-1 fw-bold" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+                        {{ form.title }}
+                    </div>
+                    <div class="form-group my-2">
+                        <label class="my-1 fw-bold" for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+                        {% comment %} <textarea class="form-control" id="{{ form.description.id_for_label }}" name="{{ form.description.name }}" rows="4"></textarea> {% endcomment %}
+                        {{ form.description }}
+                    </div>
+                    <div class="form-group my-2">
+                        <label class=" fw-bold" for="{{ form.due_date.id_for_label }}">{{ form.due_date.label }}</label>
+                        <p class="my-1">{{form.due_date}}</p>
+                    </div>
+                    <div class="form-group my-2">
+                        <label class="my-1 fw-bold" for="{{ form.completed.id_for_label }}">{{ form.completed.label }}</label>
+                        {{form.completed}}
+                    </div>
+                    <div class="form-group my-2">
+                        <label class="my-1 fw-bold" for="{{ form.todo_list.id_for_label }}">{{ form.todo_list.label }}</label>
+                        {{form.todo_list}}
+                    </div>
+                    {% comment %} {{ form.as_p }} {% endcomment %}
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-sm py-2 btn-success w-25">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock content %}
