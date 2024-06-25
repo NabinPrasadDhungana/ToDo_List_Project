@@ -23,13 +23,16 @@
     .search-button {
         margin-top: 5px;
     }
+    .main {
+        max-width: 100%;
+    }
 }
 
 /* Media query for medium devices (tablets, 576px - 991px wide) */
 @media (min-width: 576px) and (max-width: 991.98px) {
     .main {
         font-size: 16px; /* Default font size */
-        padding: 0 50px; /* Default padding */
+        padding: 0 30px; /* Default padding */
     }
 }
 
@@ -58,7 +61,7 @@ nav {
 
 .todo-list {
     width: 100%;
-    padding: 30px;
+    padding-top: 1rem;
     text-align: center;
 }
 
@@ -75,6 +78,7 @@ hr {
     text-decoration: none;
     color: #333;
     font-size: large;
+    margin: 5px;
 }
 
 .todo-table a:hover {

@@ -1,7 +1,6 @@
 from typing import Any
-from django.shortcuts import redirect
-from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView, UpdateView, CreateView
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, DetailView, UpdateView, CreateView, DeleteView
 from .forms import *
 
 from .models import *
@@ -56,3 +55,10 @@ class ItemCreateView(CreateView):
         todo_list_id = self.object.todo_list.id
         item_id = self.object.id
         return reverse('item_detail', kwargs={'id': todo_list_id, 'pk': item_id})
+    
+class ItemDeleteView(DeleteView):
+    model = ToDoItem
+    context_object_name = 'todo_item'
+    template_name = 'todolist_app/item_delete.html'
+    def get_success_url(self):
+        return reverse('home')
