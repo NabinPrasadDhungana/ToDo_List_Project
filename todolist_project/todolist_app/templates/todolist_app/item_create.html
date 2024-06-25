@@ -30,7 +30,10 @@
                     
                     <div class="form-group my-2">
                         <label class="my-1 fw-bold" for="{{ form.todo_list.id_for_label }}">{{ form.todo_list.label }}</label>
-                        {{form.todo_list}}
+                        <div class="listcreate d-flex justify-content-between">
+                            {{form.todo_list}}
+                            <a href="{% url 'list_create' %}" class="btn btn-sm btn-primary">Create new list</a>
+                        </div>
                     </div>
                     {% comment %} {{ form.as_p }} {% endcomment %}
                     <div class="form-group text-center d-flex justify-content-around">

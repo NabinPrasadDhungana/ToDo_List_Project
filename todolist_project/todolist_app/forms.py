@@ -7,7 +7,7 @@ class ItemUpdateForm(forms.ModelForm):
         model = ToDoItem
         exclude = ['created_date']
         widgets = {
-            'todo_list': forms.Select(attrs={'class': 'form-control'}),
+            'todo_list': forms.Select(attrs={'class': 'form-control w-75'}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'due_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
@@ -18,3 +18,11 @@ class ItemUpdateForm(forms.ModelForm):
 class ItemCreateForm(ItemUpdateForm):
     class Meta(ItemUpdateForm.Meta):
         exclude = ItemUpdateForm.Meta.exclude + ['completed']
+
+class ToDoListCreateForm(forms.ModelForm):
+    class Meta:
+        model = ToDoList
+        fields = ['title']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+        }

@@ -45,6 +45,15 @@ class ItemUpdateView(UpdateView):
     #         return redirect(self.get_success_url())
     #     return super().post(request, *args, **kwargs)
 
+class ToDoListCreateView(CreateView):
+    model = ToDoList
+    form_class = ToDoListCreateForm
+    context_object_name = 'todo_list'
+    template_name = 'todolist_app//list_create.html'
+
+    def get_success_url(self):
+        return reverse('item_create')
+
 class ItemCreateView(CreateView):
     model = ToDoItem
     form_class = ItemCreateForm
