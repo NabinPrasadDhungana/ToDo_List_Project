@@ -13,3 +13,8 @@ class ItemUpdateForm(forms.ModelForm):
             'due_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
             'completed': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+        
+# To-do item creation form
+class ItemCreateForm(ItemUpdateForm):
+    class Meta(ItemUpdateForm.Meta):
+        exclude = ItemUpdateForm.Meta.exclude + ['completed']

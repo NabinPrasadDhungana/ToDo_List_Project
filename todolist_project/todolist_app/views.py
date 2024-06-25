@@ -48,9 +48,11 @@ class ItemUpdateView(UpdateView):
 
 class ItemCreateView(CreateView):
     model = ToDoItem
-    form_class = ItemUpdateForm
+    form_class = ItemCreateForm
     context_object_name = 'todo_item'
     template_name = 'todolist_app/item_create.html'
 
     def get_success_url(self):
-        return reverse('home')
+        todo_list_id = self.object.todo_list.id
+        item_id = self.object.id
+        return reverse('item_detail', kwargs={'todo_list_id': todo_list_id, 'pk': item_id})
