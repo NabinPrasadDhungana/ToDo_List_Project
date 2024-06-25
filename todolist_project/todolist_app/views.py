@@ -55,4 +55,4 @@ class ItemCreateView(CreateView):
     def get_success_url(self):
         todo_list_id = self.object.todo_list.id
         item_id = self.object.id
-        return reverse('item_detail', kwargs={'todo_list_id': todo_list_id, 'pk': item_id})
+        return reverse('item_detail', kwargs={'id': todo_list_id, 'pk': item_id})
