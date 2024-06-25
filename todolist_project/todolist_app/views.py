@@ -1,7 +1,7 @@
 from typing import Any
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView, UpdateView
+from django.views.generic import TemplateView, DetailView, UpdateView, CreateView
 from .forms import *
 
 from .models import *
@@ -45,4 +45,12 @@ class ItemUpdateView(UpdateView):
     #     if "cancel" in request.POST:
     #         return redirect(self.get_success_url())
     #     return super().post(request, *args, **kwargs)
-    
+
+class ItemCreateView(CreateView):
+    model = ToDoItem
+    form_class = ItemUpdateForm
+    context_object_name = 'todo_item'
+    template_name = 'todolist_app/item_create.html'
+
+    def get_success_url(self):
+        return reverse('home')
