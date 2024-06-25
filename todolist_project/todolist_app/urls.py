@@ -4,10 +4,11 @@ from .views import *
 from . import views
 
 urlpatterns = [
-    path('', Home.as_view(), name='home'),
-    path('item/<int:id>/<str:pk>/', ItemDetailView.as_view(), name='item_detail'),
-    path('update/<int:id>/<str:pk>/', ItemUpdateView.as_view(), name='item_update'),
-    path('create-list/', ToDoListCreateView.as_view(), name='list_create'),
-    path('create/', ItemCreateView.as_view(), name='item_create'),
-    path('delete/<int:id>/<str:pk>/', ItemDeleteView.as_view(), name='item_delete'),
+    path('', views.Home.as_view(), name='home'),
+    path('item/<int:id>/<str:pk>/', views.ItemDetailView.as_view(), name='item_detail'),
+    path('update/<int:id>/<str:pk>/', views.ItemUpdateView.as_view(), name='item_update'),
+    path('create-list/', views.ToDoListCreateView.as_view(), name='list_create'),
+    path('delete-list/<int:pk>/', views.ToDoListDeleteView.as_view(), name='list_delete'),
+    path('create/', views.ItemCreateView.as_view(), name='item_create'),
+    path('delete/<int:id>/<str:pk>/', views.ItemDeleteView.as_view(), name='item_delete'),
 ]

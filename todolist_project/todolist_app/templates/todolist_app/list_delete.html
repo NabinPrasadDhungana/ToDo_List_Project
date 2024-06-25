@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} <title>Delete to-do List | To-Do App</title> {% endblock title %}
+
+
+{% block content %}
+<div class="container col-lg-8 col-md-10 col-sm-12">
+    <div class="card border-primary">
+        <div class="card-header text-center py-3 border-success">
+            <h2 class="card-title">Are you sure you want to delete the entire list <strong class="text-primary">{{ todo_list.title }}</strong>?</h2>
+            <p class="text-muted">All the to-do items associated to this list will be deleted along with this list.</p>
+        </div>
+        <div class="card-body">
+            <form action="" method="POST" class="d-flex w-100 justify-content-around">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-md btn-success m-3">Delete</button>
+                <a href="{% url 'home' %}" class="btn btn-md btn-danger m-3">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

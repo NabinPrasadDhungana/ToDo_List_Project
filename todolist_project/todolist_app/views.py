@@ -53,6 +53,14 @@ class ToDoListCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('item_create')
+    
+class ToDoListDeleteView(DeleteView):
+    model = ToDoList
+    context_object_name = 'todo_list'
+    template_name = 'todolist_app/list_delete.html'
+
+    def get_success_url(self):
+        return reverse('home')
 
 class ItemCreateView(CreateView):
     model = ToDoItem
