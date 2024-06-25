@@ -42,7 +42,7 @@
                   <tr>
                   <td><a href="{% url 'item_detail' item.todo_list.id item.id %}">{{ item.title }}</a></td>
                   <td>{{ item.due_date }}</td>
-                  <td><a href="{% url 'item_update' item.todo_list.id item.id %}" class="btn btn-sm btn-success text-white">Update</a><a href="{% url 'item_delete' item.todo_list.id item.id %}" class="btn btn-sm btn-danger text-white">Delete</a></td>
+                  <td><a href="{% url 'item_update' item.todo_list.id item.id %}" class="btn btn-sm btn-primary text-white" title="Update item"><i class="fas fa-edit"></i></a><a href="{% url 'item_delete' item.todo_list.id item.id %}" class="btn btn-sm btn-danger text-white" title="Delete item"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
               
               {% endfor %}
