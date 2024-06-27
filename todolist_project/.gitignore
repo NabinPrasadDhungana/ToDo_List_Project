@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # Environment variables
-# .env
+.env
 
 # Django stuff:
 *.log
