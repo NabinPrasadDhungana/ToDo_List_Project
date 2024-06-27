@@ -1,13 +1,18 @@
 from typing import Any
+from django.db import transaction
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, DetailView, UpdateView, CreateView, DeleteView
-from .forms import *
 
+from .forms import *
 from .models import *
+from allauth.account.views import SignupView
 # Create your views here.
 
-# def home(request):
-#     return render(request, 'index.html')
+class CustomSignupView(SignupView):
+    form_class = CustomSignupForm
+    template_name = 'account/signup.html'
+
 
 class Home(TemplateView):
     template_name = 'index.html'
@@ -51,6 +56,15 @@ class ToDoListCreateView(CreateView):
     context_object_name = 'todo_list'
     template_name = 'todolist_app//list_create.html'
 
+    def form_valid(self, form):
+        try:
+            with transaction.atomic():
+                self.object = form.save()
+                return HttpResponseRedirect(self.get_success_url())
+        except Exception as e:
+            form.add_error(None, str(e))  # Add a non-field error to the form
+            return self.form_invalid(form)
+
     def get_success_url(self):
         return reverse('item_create')
     
@@ -67,6 +81,15 @@ class ItemCreateView(CreateView):
     form_class = ItemCreateForm
     context_object_name = 'todo_item'
     template_name = 'todolist_app/item_create.html'
+
+    def form_valid(self, form):
+        try:
+            with transaction.atomic():
+                self.object = form.save()
+                return HttpResponseRedirect(self.get_success_url())
+        except Exception as e:
+            form.add_error(None, str(e))  # Add a non-field error to the form
+            return self.form_invalid(form)
 
     def get_success_url(self):
         todo_list_id = self.object.todo_list.id

@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(ToDoList)
 admin.site.register(ToDoItem)
+admin.site.register(CustomUser)

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+ {% load socialaccount %} 
+ {% block content %}
+
+<div class="container col-lg-8 col-md-10 col-sm-10">
+  <div class="card border-success">
+    <div class="card-header py-2 border-primary">
+      <h2 class="card-title text-center">Sign Up</h2>
+    </div>
+    <div class="card-body">
+      <form method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %} 
+        {% comment %} {{ form.as_p }} {% endcomment %}
+        <div class="form-group py-1">
+          <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+          {{ form.first_name }}
+        </div>
+        <div class="form-group py-1">
+          <label for="{{ form.middle_name.id_for_label }}">{{ form.middle_name.label }}</label>
+          {{ form.middle_name }}
+        </div>
+        <div class="form-group py-1">
+          <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+          {{ form.last_name }}
+        </div>
+        <div class="form-group py-1">
+          <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+          {{ form.email }}
+        </div>
+        <div class="form-group py-1">
+          <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+          {{ form.password1 }}
+        </div>
+        <div class="form-group py-1">
+          <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+          {{ form.password2 }}
+        </div>
+
+        <button type="submit">Sign Up</button>
+
+        
+        {% if form.errors %}
+          
+          {% for error in form.errors %}
+            <p class="text-danger">{{ error }}</p>
+          {% endfor %}
+            
+        {% endif %}
+          
+      </form>
+      <a href="{% provider_login_url 'google' %}">Sign Up with Google</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

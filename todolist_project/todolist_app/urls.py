@@ -11,4 +11,5 @@ urlpatterns = [
     path('delete-list/<int:pk>/', views.ToDoListDeleteView.as_view(), name='list_delete'),
     path('create/', views.ItemCreateView.as_view(), name='item_create'),
     path('delete/<int:id>/<str:pk>/', views.ItemDeleteView.as_view(), name='item_delete'),
+    path('accounts/signup/', CustomSignupView.as_view(), name='account_signup'),
 ]

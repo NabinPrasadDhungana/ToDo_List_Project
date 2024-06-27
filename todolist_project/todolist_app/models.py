@@ -3,7 +3,10 @@ from django.db import models
 from django.utils import timezone
 from datetime import datetime, timedelta
 from django.urls import reverse
+
+# Required for Custom user model
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
