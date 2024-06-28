@@ -156,7 +156,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # django-allauth configuration
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
@@ -165,6 +165,10 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 # Social account providers
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        'APP': {
+            'CLIENT_ID': config('GOOGLE_OAUTH_CLIENT_ID'),
+            'SECRET': config('GOOGLE_OAUTH_CLIENT_SECRET'),
+        },
         'SCOPE': [
             'profile',
             'email',
@@ -172,11 +176,27 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type': 'online',
         },
-        'CLIENT_ID': config('GOOGLE_OAUTH_CLIENT_ID'),
-        'SECRET': config('GOOGLE_OAUTH_CLIENT_SECRET'),
+        
     }
 }
 
 # Redirect URLs
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'root': {
+#         'handlers': ['console'],
+#         'level': 'DEBUG',
+#     },
+# }
+# settings.py
+ACCOUNT_ADAPTER = 'todolist_app.adapters.CustomAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'todolist_app.adapters.CustomSocialAccountAdapter'
