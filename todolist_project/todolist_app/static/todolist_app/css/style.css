@@ -28,6 +28,12 @@ body {
     .search-button {
         margin-top: 5px;
     }
+
+    .profile-info ul a i {
+        display: block;
+        text-align: center;
+        margin: 1rem 0 0;
+    }
 }
 
 /* Media query for medium devices (tablets, 576px - 991px wide) */
@@ -35,6 +41,12 @@ body {
     .main {
         font-size: 16px; /* Default font size */
         padding: 0 30px; /* Default padding */
+    }
+
+    .profile-info ul a i {
+        display: block;
+        text-align: center;
+        margin: 1rem 0 0;
     }
 }
 
