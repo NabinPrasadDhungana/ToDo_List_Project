@@ -69,7 +69,15 @@
 
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
-                  <a href="#"  role="button" data-bs-toggle="dropdown" id="profileDropdown" aria-expanded="false"><i class="h2 fa fa-user shadow" aria-hidden="true"></i></i></a>
+                  {% comment %} <a href="#"  role="button" data-bs-toggle="dropdown" id="profileDropdown" aria-expanded="false"><i class="h2 fa fa-user shadow" aria-hidden="true"></i></i></a> {% endcomment %}
+                  <a href="#"  role="button" data-bs-toggle="dropdown" id="profileDropdown" aria-expanded="false">{% if user.is_authenticated and user.socialaccount_set.exists %}
+                    <div class="img-div">
+                      <img src="{{ user.socialaccount_set.first.extra_data.picture }}" alt="{{ user.get_full_name }}" class="profile-image rounded-circle">
+                    </div>
+                {% else %}
+                <i class="h2 fa fa-user shadow" aria-hidden="true"></i></i>
+                {% endif %}
+                </a>
                   <ul class="dropdown-menu" aria-labelledby="profileDropdown" >
                     {% if user.is_authenticated %}
                     <li>

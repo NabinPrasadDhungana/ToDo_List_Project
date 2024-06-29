@@ -34,6 +34,16 @@ body {
         text-align: center;
         margin: 1rem 0 0;
     }
+
+    .img-div {
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-info ul a img {
+        height: 50px;
+        margin: 10px 0;
+    }
 }
 
 /* Media query for medium devices (tablets, 576px - 991px wide) */
@@ -48,6 +58,16 @@ body {
         text-align: center;
         margin: 1rem 0 0;
     }
+
+    .img-div {
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-info ul a img {
+        height: 50px;
+        margin: 10px 0 0 0;
+    }
 }
 
 /* Media query for large devices (desktops, 992px and above) */
@@ -60,6 +80,16 @@ body {
     .profile-info ul a i {
         margin: 0 0 0 50px;
     }
+
+    .profile-image {
+        height: 55px;
+        margin: 0 80px 0 15px;
+    }
+}
+
+.profile-image {
+    height: 50px;
+    margin: 0 80px 0 15px;
 }
 
 .profile-info ul a i {
