@@ -12,6 +12,9 @@ class CustomAccountAdapter(DefaultAccountAdapter):
     def get_login_redirect_url(self, request):
         path = "/"
         return path
+    
+    # def get_signup_redirect_url(self, request):
+    #     return "/accounts/login/"
 
 class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
     def pre_social_login(self, request, sociallogin):

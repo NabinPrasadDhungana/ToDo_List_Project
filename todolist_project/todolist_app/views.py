@@ -13,6 +13,9 @@ class CustomSignupView(SignupView):
     form_class = CustomSignupForm
     template_name = 'account/signup.html'
 
+    def get_success_url(self):
+        return reverse('account_login')
+
 
 class Home(TemplateView):
     template_name = 'index.html'
