@@ -1,55 +1,109 @@
-{% extends 'base.html' %} {% load static %} 
-{% block title %} <title>Home | To-Do App</title> {% endblock title %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Home | To-Do App</title>
+{% endblock title %}
+
 {% block content %}
-  <div class="card border-0">
-    <div class="card-heading d-flex justify-content-center align-items-center mt-3" >
-      <h1 class="text-success h2">TO-DO</h1>
-      <i class="fas fa-check-square"></i>
+<div class="card border-0">
+    <div class="card-heading d-flex justify-content-center align-items-center mt-3">
+        <h1 class="text-success h2">TO-DO</h1>
+        <i class="fas fa-check-square"></i>
     </div>
     <div class="card-body">
         <form class="text-center" method="GET" action="{% url 'home' %}">
-          <input class="todo-search p-1 px-4 border-1 border-primary" type="text" name="search" placeholder="Search To-Do Lists/Items">
-          <button class="p-1 border-1 border-primary text-success search-button" type="submit">Search</button>
+            <input class="todo-search p-1 px-4 border-1 border-primary" type="text" name="search" placeholder="Search To-Do Lists/Items">
+            <button class="p-1 border-1 border-primary text-success search-button" type="submit">Search</button>
         </form>
         <hr>
 
         <div class="todo-list">
-          {% comment %} <a class="nav-link dropdown-toggle float-start" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul> {% endcomment %}
-          
-          {% if not todo_items %}
-            <p class="text-center text-danger pt-5">There are no to-dos currently.</p>
-          {% else %}             
-          <table class="todo-table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Due Date</th>
-                <th></th>
-              </tr>
-            </thead>
-            
-            <tbody>
-              {% for item in todo_items %}
-              
-                  <tr>
-                  <td><a href="{% url 'item_detail' item.todo_list.id item.id %}">{{ item.title }}</a></td>
-                  <td>{{ item.due_date }}</td>
-                  <td><a href="{% url 'item_update' item.todo_list.id item.id %}" class="btn btn-sm btn-primary text-white" title="Update item"><i class="fas fa-edit"></i></a><a href="{% url 'item_delete' item.todo_list.id item.id %}" class="btn btn-sm btn-danger text-white" title="Delete item"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                </tr>
-              
-              {% endfor %}
-            </tbody>
-          </table>
-          {% endif %}
+            {% if query %}
+                <h2>Search Results for "{{ query }}"</h2>
+                {% if todo_items %}
+                    <table class="todo-table table w-100">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Due Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in todo_items %}
+                                <tr>
+                                    <td><a href="{% url 'item_detail' item.todo_list.id item.id %}">{{ item.title }}</a></td>
+                                    <td>{{ item.due_date }}</td>
+                                    <td>
+                                        <a href="{% url 'item_update' item.todo_list.id item.id %}" class="btn btn-sm btn-primary text-white" title="Update item">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{% url 'item_delete' item.todo_list.id item.id %}" class="btn btn-sm btn-danger text-white" title="Delete item">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-center text-danger pt-5">No items found matching "{{ query }}".</p>
+                {% endif %}
+            {% else %}
+                {% if todo_lists %}
+                    {% for todo_list, items in todo_lists.items %}
+                        <div class="dropdown my-3 w-100">
+                            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton{{ forloop.counter }}" data-bs-toggle="collapse" data-bs-target="#collapseMenu{{ forloop.counter }}" aria-expanded="false" aria-controls="collapseMenu{{ forloop.counter }}">
+                                {{ todo_list.title }}
+                            </button>
+                            <div class="collapse w-100" id="collapseMenu{{ forloop.counter }}">
+                                <div class="card card-body">
+                                    {% if items %}
+                                        <table class="table w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Due Date</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in items %}
+                                                    <tr>
+                                                        <td><a href="{% url 'item_detail' item.todo_list.id item.id %}">{{ item.title }}</a></td>
+                                                        <td>{{ item.due_date }}</td>
+                                                        <td>
+                                                            <a href="{% url 'item_update' item.todo_list.id item.id %}" class="btn btn-sm btn-primary text-white" title="Update item">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                            <a href="{% url 'item_delete' item.todo_list.id item.id %}" class="btn btn-sm btn-danger text-white" title="Delete item">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    {% else %}
+                                        <p class="text-center text-danger pt-5">No items in this list</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center text-danger pt-5">There are no to-do lists currently. Log in or Signup to create one.</p>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
-  </div>
+</div>
+
+<!-- Custom CSS for ensuring dropdown alignment -->
+<style>
+    /*.card-body {
+        overflow: hidden;
+    }*/
+</style>
 {% endblock content %}

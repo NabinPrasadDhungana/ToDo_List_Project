@@ -27,11 +27,22 @@ class Home(TemplateView):
         query = self.request.GET.get('search')
 
         if query:
-            context['todo_items'] = ToDoItem.objects.filter(title__icontains=query)
+            # Filter `ToDoList` and `ToDoItem` based on the search query
+            todo_lists = ToDoList.objects.filter(title__icontains=query)
+            todo_items = ToDoItem.objects.filter(title__icontains=query)
         else:
-            context['todo_items'] = ToDoItem.objects.all()
+            todo_lists = ToDoList.objects.all()
+            todo_items = ToDoItem.objects.all()
 
+        # Group `ToDoItem` objects by their associated `ToDoList`
+        todo_list_items = {}
+        for todo_list in todo_lists:
+            todo_list_items[todo_list] = todo_list.todoitem_set.all()
+
+        context['todo_lists'] = todo_list_items
+        context['todo_items'] = todo_items
         return context
+
     
 class ItemDetailView(DetailView):
     model = ToDoItem
