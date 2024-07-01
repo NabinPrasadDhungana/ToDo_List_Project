@@ -1,8 +1,10 @@
 from typing import Any
+from django.urls import reverse_lazy
 from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, DetailView, UpdateView, CreateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
 from .models import *
@@ -79,11 +81,21 @@ class ToDoListDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('home')
 
-class ItemCreateView(CreateView):
+class ItemCreateView(LoginRequiredMixin, CreateView):
     model = ToDoItem
     form_class = ItemCreateForm
     context_object_name = 'todo_item'
     template_name = 'todolist_app/item_create.html'
+
+    def get_login_url(self):
+        return reverse('account_login')
+    
+    # def dispatch(self, request, *args, **kwargs):
+    #     if not request.user.is_authenticated:
+    #         # User is not logged in, redirect to login page with a query string
+    #         next_url = request.path_info  # Capture the current URL path
+    #         return redirect(reverse('account_login') + f'?next={next_url}')
+    #     return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         try:
