@@ -33,7 +33,7 @@
     <hr />
 
     <div class="todo-list">
-      {% if query %}
+    {% if query %}
       <h2>Search Results for "{{ query }}"</h2>
       {% if todo_items %}
       <table class="todo-table table w-100">
@@ -73,12 +73,14 @@
           {% endfor %}
         </tbody>
       </table>
-      {% else %}
+        {% else %}
       <p class="text-center text-danger pt-5">
         No items found matching "{{ query }}".
       </p>
-      {% endif %} {% else %} {% if todo_lists %} {% for todo_list, items in
-      todo_lists.items %}
+      {% endif %} 
+    {% else %} 
+        {% if todo_lists %} 
+            {% for todo_list, items in todo_lists.items %}
       <div class="dropdown my-3 w-100">
         <button
           class="btn btn-primary dropdown-toggle w-100"
@@ -131,17 +133,19 @@
                 {% endfor %}
               </tbody>
             </table>
-            {% else %}
+                {% else %}
             <p class="text-center text-danger pt-3">No items in this list</p>
-            {% endif %}
+                {% endif %}
           </div>
         </div>
       </div>
-      {% endfor %} {% else %}
+        {% endfor %} 
+    {% else %}
       <p class="text-center text-danger pt-5">
         There are no to-do lists currently. Log in or Signup to create one.
       </p>
-      {% endif %} {% endif %}
+      {% endif %} 
+    {% endif %}
     </div>
   </div>
 </div>
