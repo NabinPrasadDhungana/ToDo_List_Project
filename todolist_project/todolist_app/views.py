@@ -40,8 +40,10 @@ class Home(TemplateView):
             todo_list_items[todo_list] = todo_list.todoitem_set.all()
 
         context['todo_lists'] = todo_list_items
+        context['query'] = query
         context['todo_items'] = todo_items
         return context
+
 
     
 class ItemDetailView(DetailView):
