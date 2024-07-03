@@ -93,6 +93,24 @@ class ToDoListDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse('home')
+    
+class ToDoListUpdateView(UpdateView):
+    model = ToDoList
+    form_class = ToDoListUpdateForm
+    context_object_name = 'todo_list'
+    template_name = 'todolist_app/list_update.html'
+
+    def get_success_url(self):
+        return reverse('home')
+    
+    # def form_valid(self, form):
+    #     try:
+    #         with transaction.atomic():
+    #             self.object = form.save()
+    #             return HttpResponseRedirect(self.get_success_url())
+    #     except Exception as e:
+    #         form.add_error(None, str(e))  # Add a non-field error to the form
+    #         return self.form_invalid(form)
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = ToDoItem

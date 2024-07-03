@@ -56,3 +56,6 @@ class ToDoListCreateForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+class ToDoListUpdateForm(ToDoListCreateForm):
+    pass
