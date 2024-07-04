@@ -137,7 +137,7 @@
             <p class="text-center text-danger pt-3">No items in this list</p>
                 {% endif %}
                 <div class="btns">
-                  <a href="{% url 'list_update' todo_list.id %}" class="btn btn-sm btn-success">Update {{ todo_list.title }}</a>
+                  <a href="{% url 'list_update' todo_list.id %}" class="btn btn-sm btn-success">Rename {{ todo_list.title }}</a>
                   <a href="{% url 'list_delete' todo_list.id %}" class="btn btn-sm btn-danger">Delete {{ todo_list.title }}</a>
                 </div>
           </div>
