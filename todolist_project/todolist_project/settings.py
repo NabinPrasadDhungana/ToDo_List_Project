@@ -147,7 +147,7 @@ STATICFILES_DIRS = [
 AUTH_USER_MODEL = 'todolist_app.CustomUser'
 
 # Site ID for django-allauth
-SITE_ID = 1
+SITE_ID = 2
 
 # Authentication backends for django-allauth
 AUTHENTICATION_BACKENDS = (
@@ -156,7 +156,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # django-allauth configuration
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False

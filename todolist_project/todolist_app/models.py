@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 from django.utils import timezone
 from datetime import datetime, timedelta
@@ -58,6 +59,7 @@ def one_week_hence():
 
 class ToDoList(models.Model):
     title = models.CharField(max_length=100, unique=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse("list", args=[self.id])

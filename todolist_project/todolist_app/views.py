@@ -8,8 +8,28 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
 from .models import *
-from allauth.account.views import SignupView
+from allauth.account.views import SignupView, LoginView
 # Create your views here.
+from allauth.account.views import ConfirmEmailView
+from allauth.account.models import EmailAddress
+from django.shortcuts import redirect
+from django.http import HttpResponse
+
+class CustomConfirmEmailView(ConfirmEmailView):
+    def get(self, *args, **kwargs):
+        # Log the execution
+        print("CustomConfirmEmailView get method called")
+        # Call the parent get method
+        response = super().get(*args, **kwargs)
+        return response
+    
+    def post(self, *args, **kwargs):
+        # Log the execution
+        print("CustomConfirmEmailView post method called")
+        # Call the parent post method
+        response = super().post(*args, **kwargs)
+        return response
+
 
 class CustomSignupView(SignupView):
     form_class = CustomSignupForm
@@ -17,6 +37,13 @@ class CustomSignupView(SignupView):
 
     def get_success_url(self):
         return reverse('account_login')
+
+class CustomLoginView(LoginView):
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # Custom logic after form is valid
+        return response
+
 
 
 class Home(TemplateView):

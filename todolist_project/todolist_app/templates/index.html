@@ -145,9 +145,19 @@
       </div>
         {% endfor %} 
     {% else %}
-      <p class="text-center text-danger pt-5">
-        There are no to-do lists currently. Log in or Signup to create one.
-      </p>
+      
+      {% if user.is_authenticated %}
+        <p class="text-center text-danger pt-5">
+          There are no to-do lists currently. Create one now.
+        </p>
+
+        {% else %}
+        
+        <p class="text-center text-danger pt-5">
+          There are no to-do lists currently. Log in or Signup to create one.
+        </p>
+      {% endif %}
+        
       {% endif %} 
     {% endif %}
     </div>
