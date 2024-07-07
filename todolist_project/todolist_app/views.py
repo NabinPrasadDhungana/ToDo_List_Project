@@ -46,25 +46,27 @@ class CustomLoginView(LoginView):
 
 
 
-class Home(TemplateView):
+class Home(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'
+    login_url = 'account_login'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get('search')
+        user = self.request.user
 
         if query:
-            # Filter `ToDoList` and `ToDoItem` based on the search query
-            todo_lists = ToDoList.objects.filter(title__icontains=query)
-            todo_items = ToDoItem.objects.filter(title__icontains=query)
+            # Filter `ToDoList` and `ToDoItem` based on the search query and current user
+            todo_lists = ToDoList.objects.filter(user=user, title__icontains=query)
+            todo_items = ToDoItem.objects.filter(todo_list__user=user, title__icontains=query)
         else:
-            todo_lists = ToDoList.objects.all()
-            todo_items = ToDoItem.objects.all()
+            todo_lists = ToDoList.objects.filter(user=user)
+            todo_items = ToDoItem.objects.filter(todo_list__user=user)
 
         # Group `ToDoItem` objects by their associated `ToDoList`
         todo_list_items = {}
         for todo_list in todo_lists:
-            todo_list_items[todo_list] = todo_list.todoitem_set.all()
+            todo_list_items[todo_list] = todo_list.todoitem_set.filter(todo_list__user=user)
 
         context['todo_lists'] = todo_list_items
         context['query'] = query
@@ -72,36 +74,48 @@ class Home(TemplateView):
         return context
 
 
+
     
-class ItemDetailView(DetailView):
+class ItemDetailView(LoginRequiredMixin, DetailView):
     model = ToDoItem
     context_object_name = 'todo_item'
     template_name = 'todolist_app/item_detail.html'
+    login_url = 'account_login'
 
-class ItemUpdateView(UpdateView):
+    def get_queryset(self):
+        return ToDoItem.objects.filter(todo_list__user=self.request.user)
+
+
+class ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = ToDoItem
     form_class = ItemUpdateForm
     template_name = 'item_update.html'
     context_object_name = 'todo_item'
     template_name = 'todolist_app/item_update.html'
+    login_url = 'account_login'
 
     def get_success_url(self):
         todo_list_id = self.object.todo_list.id
         item_id = self.object.id
         return reverse('item_detail', kwargs={'id': todo_list_id, 'pk': item_id})
     
+    def get_queryset(self):
+        return ToDoItem.objects.filter(todo_list__user=self.request.user)
+    
     # def post(self, request, *args, **kwargs):
     #     if "cancel" in request.POST:
     #         return redirect(self.get_success_url())
     #     return super().post(request, *args, **kwargs)
 
-class ToDoListCreateView(CreateView):
+class ToDoListCreateView(LoginRequiredMixin, CreateView):
     model = ToDoList
     form_class = ToDoListCreateForm
     context_object_name = 'todo_list'
     template_name = 'todolist_app//list_create.html'
+    login_url = 'account_login'
 
     def form_valid(self, form):
+        form.instance.user = self.request.user
         try:
             with transaction.atomic():
                 self.object = form.save()
@@ -113,19 +127,27 @@ class ToDoListCreateView(CreateView):
     def get_success_url(self):
         return reverse('item_create')
     
-class ToDoListDeleteView(DeleteView):
+class ToDoListDeleteView(LoginRequiredMixin, DeleteView):
     model = ToDoList
     context_object_name = 'todo_list'
     template_name = 'todolist_app/list_delete.html'
+    login_url = 'account_login'
+
+    def get_queryset(self):
+        return ToDoList.objects.filter(user=self.request.user)
 
     def get_success_url(self):
         return reverse('home')
     
-class ToDoListUpdateView(UpdateView):
+class ToDoListUpdateView(LoginRequiredMixin, UpdateView):
     model = ToDoList
     form_class = ToDoListUpdateForm
     context_object_name = 'todo_list'
     template_name = 'todolist_app/list_update.html'
+    login_url = 'account_login'
+
+    def get_queryset(self):
+        return ToDoList.objects.filter(user=self.request.user)
 
     def get_success_url(self):
         return reverse('home')
@@ -169,9 +191,14 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         item_id = self.object.id
         return reverse('item_detail', kwargs={'id': todo_list_id, 'pk': item_id})
     
-class ItemDeleteView(DeleteView):
+class ItemDeleteView(LoginRequiredMixin, DeleteView):
     model = ToDoItem
     context_object_name = 'todo_item'
     template_name = 'todolist_app/item_delete.html'
+    login_url = 'account_login'
+
+    def get_queryset(self):
+        return ToDoItem.objects.filter(todo_list__user=self.request.user)
+    
     def get_success_url(self):
         return reverse('home')

@@ -49,6 +49,13 @@ class ItemCreateForm(ItemUpdateForm):
     class Meta(ItemUpdateForm.Meta):
         exclude = ItemUpdateForm.Meta.exclude + ['completed']
 
+    def save(self, user, commit=True):
+        todo_item = super(ItemCreateForm, self).save(commit=False)
+        todo_item.todo_list.user = user
+        if commit:
+            todo_item.save()
+        return todo_item
+
 class ToDoListCreateForm(forms.ModelForm):
     class Meta:
         model = ToDoList
@@ -56,6 +63,13 @@ class ToDoListCreateForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+    def save(self, user, commit=True):
+        todo_list = super(ToDoListCreateForm, self).save(commit=False)
+        todo_list.user = user
+        if commit:
+            todo_list.save()
+        return todo_list
 
 class ToDoListUpdateForm(ToDoListCreateForm):
     pass
